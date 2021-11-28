@@ -23,7 +23,7 @@ class RouteOptimizer:
             dimensions = len(locations)
             timeMatrix = np.zeros((dimensions, dimensions), int)   
 
-            gmaps = googlemaps.Client(key='')   #parse me from .env !!!!!!!!!!!!!
+            gmaps = googlemaps.Client(key='AIzaSyAlN6KomodGChDkjA9G5hqyAjs7hG6BX_k')   #parse me from .env !!!!!!!!!!!!!
 
             for i in range(0, dimensions):
                 for j in range(i+1, dimensions):
@@ -41,7 +41,7 @@ class RouteOptimizer:
 
         return self.timeMatrix
 
-    def create_data_model(self):
+    def createDataModel(self):
         data = {}
         data['time_matrix'] = self.buildTimeMatrix()
 
@@ -58,7 +58,7 @@ class RouteOptimizer:
         self.dataModel = data
         return data           
         
-    def print_solution(self, data, manager, routing, solution):
+    def printSolution(self, data, manager, routing, solution):
 
         print(f'Objective: {solution.ObjectiveValue()}')
         time_dimension = routing.GetDimensionOrDie('Time')
@@ -82,10 +82,37 @@ class RouteOptimizer:
             total_time += solution.Min(time_var)
         print('Total time of all routes: {}min'.format(total_time))
 
+    def writeSolution(self, filePath: str="solution.txt"):
+        with open(filePath, 'w') as file:
+            file.write(f'Objective: {self.solution.ObjectiveValue()}')
+            time_dimension = self.routing.GetDimensionOrDie('Time')
+            total_time = 0
+            for vehicle_id in range(self.data['num_vehicles']):
+                index = self.routing.Start(vehicle_id)
+                plan_output = 'Route for vehicle {}:\n'.format(vehicle_id)
+                while not self.routing.IsEnd(index):
+                    time_var = time_dimension.CumulVar(index)
+                    plan_output += '{0} Time({1},{2}) -> '.format(
+                        self.manager.IndexToNode(index), self.solution.Min(time_var),
+                        self.solution.Max(time_var))
+                    index = self.solution.Value(self.routing.NextVar(index))
+                time_var = time_dimension.CumulVar(index)
+                plan_output += '{0} Time({1},{2})\n'.format(self.manager.IndexToNode(index),
+                                                            self.solution.Min(time_var),
+                                                            self.solution.Max(time_var))
+                plan_output += 'Time of the route: {}min\n'.format(
+                    self.solution.Min(time_var))
+                file.write(plan_output)
+                total_time += self.solution.Min(time_var)
+            file.write('Total time of all routes: {}min'.format(total_time))
+            
+
+
+
 
     def solve(self):
         # Instantiate the data problem.
-        data = self.create_data_model()
+        data = self.createDataModel()
         print("data model created")
 
         # Create the routing index manager.
@@ -149,5 +176,9 @@ class RouteOptimizer:
         # print(solution)
         # Print solution on console.
         if solution:
-            self.print_solution(data, manager, routing, solution)
+            self.printSolution(data, manager, routing, solution)
+            self.solution = solution
+            self.manager = manager
+            self.routing = routing
+            self.data = data
         
