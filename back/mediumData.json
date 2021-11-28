@@ -1,0 +1,118 @@
+[{
+        "StreetNumber": 17,
+        "Street": "Witolda",
+        "PostalCode": "81-532",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": "39A",
+        "Street": "Witolda",
+        "PostalCode": "81-532",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 260,
+        "Street": "Wielkoplska",
+        "PostalCode": "81-532",
+        "City": "Gdynia",
+        "IsNormalized": false,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": "16A",
+        "Street": "Korzenna",
+        "PostalCode": "81-587",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 4,
+        "Street": "Wiczlinska",
+        "PostalCode": "81-578",
+        "City": "Gdynia",
+        "IsNormalized": false,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 4,
+        "Street": "Wiczlinska",
+        "PostalCode": "81-578",
+        "City": "Gdynia",
+        "IsNormalized": false,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": "40C",
+        "Street": "Starowiejska",
+        "PostalCode": "81-356",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 7,
+        "Street": "10 Lutego",
+        "PostalCode": "81-366",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": "",
+        "Street": "Swietojanska 75",
+        "PostalCode": "81-389",
+        "City": "Gdynia",
+        "IsNormalized": false,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 45,
+        "Street": "Ignacego Krasickiego",
+        "PostalCode": "81-377",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 5,
+        "Street": "Necla",
+        "PostalCode": "81-377",
+        "City": "Gdynia",
+        "IsNormalized": false,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 24,
+        "Street": "B. Chłopskich",
+        "PostalCode": "81-415",
+        "City": "Gdynia",
+        "IsNormalized": false,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 3,
+        "Street": "Łużycka",
+        "PostalCode": "81-537",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "10:00:00",
+        "CloseTime": "16:00:00"
+    }
+]

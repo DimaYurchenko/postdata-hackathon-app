@@ -1,0 +1,37 @@
+[{
+        "StreetNumber": 17,
+        "Street": "Witolda",
+        "PostalCode": "81-532",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": "39A",
+        "Street": "Witolda",
+        "PostalCode": "81-532",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "07:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 260,
+        "Street": "Wielkoplska",
+        "PostalCode": "81-532",
+        "City": "Gdynia",
+        "IsNormalized": false,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": "16A",
+        "Street": "Korzenna",
+        "PostalCode": "81-587",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "10:00:00",
+        "CloseTime": "16:00:00"
+    }
+]
