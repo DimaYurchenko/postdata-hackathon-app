@@ -4,6 +4,11 @@ from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 import googlemaps
 import numpy as np
+import os                                                                                                                                                                                                          
+from dotenv import load_dotenv, find_dotenv
+from pathlib import Path
+load_dotenv(Path("/my/path/.env"))
+print(os.getenv("CONNSTRING"))
 
 
 
@@ -21,10 +26,12 @@ class RouteOptimizer:
     def buildTimeMatrix(self):
         def build(locations: List[LocationObject]):
             dimensions = len(locations)
-            timeMatrix = np.zeros((dimensions, dimensions), int)   
+            timeMatrix = np.zeros((dimensions, dimensions), int)
 
-            gmaps = googlemaps.Client(key='AIzaSyAlN6KomodGChDkjA9G5hqyAjs7hG6BX_k')   #parse me from .env !!!!!!!!!!!!!
+            load_dotenv(Path(".env"))
+            apiKey = os.getenv("MAPS_API_KEY")
 
+            gmaps = googlemaps.Client(key=apiKey)  
             for i in range(0, dimensions):
                 for j in range(i+1, dimensions):
 
@@ -100,11 +107,11 @@ class RouteOptimizer:
                 plan_output += '{0} Time({1},{2})\n'.format(self.manager.IndexToNode(index),
                                                             self.solution.Min(time_var),
                                                             self.solution.Max(time_var))
-                plan_output += 'Time of the route: {}min\n'.format(
+                plan_output += 'Time of the route: {}sec\n'.format(
                     self.solution.Min(time_var))
                 file.write(plan_output)
                 total_time += self.solution.Min(time_var)
-            file.write('Total time of all routes: {}min'.format(total_time))
+            file.write('Total time of all routes: {}sec'.format(total_time))
             
 
 

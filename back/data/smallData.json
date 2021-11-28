@@ -33,5 +33,14 @@
         "IsNormalized": true,
         "OpenTime": "10:00:00",
         "CloseTime": "16:00:00"
+    },
+    {
+        "StreetNumber": 7,
+        "Street": "10 Lutego",
+        "PostalCode": "81-366",
+        "City": "Gdynia",
+        "IsNormalized": true,
+        "OpenTime": "08:00:00",
+        "CloseTime": "16:00:00"
     }
 ]
