@@ -113,8 +113,8 @@ class RouteOptimizer:
         time = 'Time'
         routing.AddDimension(
             transit_callback_index,
-            1800,  # allow waiting time
-            60000,  # maximum time per vehicle
+            40000,  # allow waiting time
+            86400,  # maximum time per vehicle
             False,  # Don't force start cumul to zero.
             time)
         time_dimension = routing.GetDimensionOrDie(time)
