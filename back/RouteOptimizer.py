@@ -23,7 +23,7 @@ class RouteOptimizer:
             dimensions = len(locations)
             timeMatrix = np.zeros((dimensions, dimensions), int)   
 
-            gmaps = googlemaps.Client(key='key')   #parse me from .env !!!!!!!!!!!!!
+            gmaps = googlemaps.Client(key='')   #parse me from .env !!!!!!!!!!!!!
 
             for i in range(0, dimensions):
                 for j in range(i+1, dimensions):
@@ -113,8 +113,8 @@ class RouteOptimizer:
         time = 'Time'
         routing.AddDimension(
             transit_callback_index,
-            7200,  # allow waiting time
-            36000,  # maximum time per vehicle
+            1800,  # allow waiting time
+            60000,  # maximum time per vehicle
             False,  # Don't force start cumul to zero.
             time)
         time_dimension = routing.GetDimensionOrDie(time)

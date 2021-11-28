@@ -83,7 +83,7 @@ const SimpleMap = (props) => {
           points.map((point, index) => <LandMark key={index} text={index + 1} long={point.long} lat={point.lat} />)
         }
       </div>
-      <LocationsList locations={[...points.slice(), points[0]]} />
+      <LocationsList locations={[...points.slice(), points[0]]} listType={points.length >= 26 ? '1' : 'A'} />
     </div>
   );
 }
