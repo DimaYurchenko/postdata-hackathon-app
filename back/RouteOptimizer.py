@@ -7,8 +7,6 @@ import numpy as np
 import os                                                                                                                                                                                                          
 from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
-load_dotenv(Path("/my/path/.env"))
-print(os.getenv("CONNSTRING"))
 
 
 
