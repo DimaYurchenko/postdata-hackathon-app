@@ -81,11 +81,12 @@ class RouteOptimizer:
             plan_output += '{0} Time({1},{2})\n'.format(manager.IndexToNode(index),
                                                         solution.Min(time_var),
                                                         solution.Max(time_var))
-            plan_output += 'Time of the route: {}min\n'.format(
-                solution.Min(time_var))
+
+            route_time = solution.Min(time_var) - solution.Min(time_dimension.CumulVar(0))
+            plan_output += f'Time of the route: {route_time}sec\n'
             print(plan_output)
-            total_time += solution.Min(time_var)
-        print('Total time of all routes: {}min'.format(total_time))
+            total_time += route_time
+        print('Total time of all routes: {}sec'.format(total_time))
 
     def writeSolution(self, filePath: str="solution.txt"):
         with open(filePath, 'w') as file:
