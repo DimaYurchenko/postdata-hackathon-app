@@ -7,6 +7,8 @@ import numpy as np
 import os                                                                                                                                                                                                          
 from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
+from time import strftime
+from time import gmtime
 
 
 
@@ -18,6 +20,8 @@ class RouteOptimizer:
             self.locations = locations
         else:
             self.locations = locations
+
+        self.timeMatrix = None
  
 
     
@@ -48,7 +52,10 @@ class RouteOptimizer:
 
     def createDataModel(self):
         data = {}
-        data['time_matrix'] = self.buildTimeMatrix()
+        if self.timeMatrix == None:
+            self.buildTimeMatrix()
+
+        data['time_matrix'] = self.timeMatrix
 
         timeWindows = []
 
@@ -63,26 +70,26 @@ class RouteOptimizer:
         self.dataModel = data
         return data           
         
-    def printSolution(self, data, manager, routing, solution):
+    def printSolution(self):
 
-        print(f'Objective: {solution.ObjectiveValue()}')
-        time_dimension = routing.GetDimensionOrDie('Time')
+        print(f'Objective: {self.solution.ObjectiveValue()}')
+        time_dimension = self.routing.GetDimensionOrDie('Time')
         total_time = 0
-        for vehicle_id in range(data['num_vehicles']):
-            index = routing.Start(vehicle_id)
+        for vehicle_id in range(self.data['num_vehicles']):
+            index = self.routing.Start(vehicle_id)
             plan_output = 'Route for vehicle {}:\n'.format(vehicle_id)
-            while not routing.IsEnd(index):
+            while not self.routing.IsEnd(index):
                 time_var = time_dimension.CumulVar(index)
                 plan_output += '{0} Time({1},{2}) -> '.format(
-                    manager.IndexToNode(index), solution.Min(time_var),
-                    solution.Max(time_var))
-                index = solution.Value(routing.NextVar(index))
+                    self.manager.IndexToNode(index), strftime("%H:%M:%S", gmtime(self.solution.Min(time_var))),
+                    strftime("%H:%M:%S", gmtime(self.solution.Max(time_var))))
+                index = self.solution.Value(self.routing.NextVar(index))
             time_var = time_dimension.CumulVar(index)
-            plan_output += '{0} Time({1},{2})\n'.format(manager.IndexToNode(index),
-                                                        solution.Min(time_var),
-                                                        solution.Max(time_var))
+            plan_output += '{0} Time({1},{2})\n'.format(self.manager.IndexToNode(index),
+                                                        strftime("%H:%M:%S", gmtime(self.solution.Min(time_var))),
+                                                        strftime("%H:%M:%S", gmtime(self.solution.Max(time_var))))
 
-            route_time = solution.Min(time_var) - solution.Min(time_dimension.CumulVar(0))
+            route_time = self.solution.Min(time_var) - self.solution.Min(time_dimension.CumulVar(0))
             plan_output += f'Time of the route: {route_time}sec\n'
             print(plan_output)
             total_time += route_time
@@ -146,7 +153,7 @@ class RouteOptimizer:
         time = 'Time'
         routing.AddDimension(
             transit_callback_index,
-            40000,  # allow waiting time
+            20000,  # allow waiting time
             86400,  # maximum time per vehicle
             False,  # Don't force start cumul to zero.
             time)
@@ -182,9 +189,9 @@ class RouteOptimizer:
         # print(solution)
         # Print solution on console.
         if solution:
-            self.printSolution(data, manager, routing, solution)
             self.solution = solution
             self.manager = manager
             self.routing = routing
             self.data = data
+            self.printSolution()
         
